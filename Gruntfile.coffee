@@ -3,6 +3,8 @@ module.exports = (grunt) ->
     pkg: grunt.file.readJSON('package.json')
 
     coffee:
+      options:
+        sourceMap: true
       glob_to_multiple:
         expand: true
         cwd: 'src'
@@ -20,7 +22,7 @@ module.exports = (grunt) ->
 
     shell:
       test:
-        command: 'node node_modules/.bin/jasmine-focused --captureExceptions --coffee spec'
+        command: 'node node_modules/.bin/nyc --extension .coffee --exclude \'spec/**\' node node_modules/.bin/jasmine-focused --captureExceptions --coffee spec'
         options:
           stdout: true
           stderr: true
